@@ -4,12 +4,41 @@ import { useState, useRef, useEffect } from "react"
 import { Check, ChevronLeft, ChevronRight, Flame, Target } from "lucide-react"
 
 export default function TrainingTracker() {
-  const [trainedDays, setTrainedDays] = useState<Set<number>>(new Set([3, 5, 6, 8, 9, 10, 11, 12]))
+  const [trainedDays, setTrainedDays] = useState<Set<number>>(new Set())
   const scrollRef = useRef<HTMLDivElement>(null)
   const today = new Date()
   const currentDay = today.getDate()
   const currentMonth = today.toLocaleDateString("en-US", { month: "long" })
   const currentYear = today.getFullYear()
+  
+  // Create a unique key for localStorage based on year and month
+  const storageKey = `unifit-training-tracker-${today.getFullYear()}-${today.getMonth()}`
+
+  // Load data from localStorage on component mount
+  useEffect(() => {
+    const savedData = localStorage.getItem(storageKey)
+    if (savedData) {
+      try {
+        const parsedData = JSON.parse(savedData)
+        setTrainedDays(new Set(parsedData))
+      } catch (error) {
+        console.error("Failed to parse training data from localStorage:", error)
+        // Initialize with default data if parsing fails
+        setTrainedDays(new Set([3, 5, 6, 8, 9, 10, 11, 12]))
+      }
+    } else {
+      // Initialize with some default data for demo purposes
+      const defaultData = new Set([3, 5, 6, 8, 9, 10, 11, 12])
+      setTrainedDays(defaultData)
+      // Save default data to localStorage
+      localStorage.setItem(storageKey, JSON.stringify(Array.from(defaultData)))
+    }
+  }, [storageKey])
+
+  // Save data to localStorage whenever trainedDays changes
+  useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(Array.from(trainedDays)))
+  }, [trainedDays, storageKey])
 
   const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate()
   const days = Array.from({ length: daysInMonth }, (_, i) => i + 1)

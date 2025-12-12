@@ -508,16 +508,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 function TrainingTracker() {
     _s();
-    const [trainedDays, setTrainedDays] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(new Set([
-        3,
-        5,
-        6,
-        8,
-        9,
-        10,
-        11,
-        12
-    ]));
+    const [trainedDays, setTrainedDays] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(new Set());
     const scrollRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const today = new Date();
     const currentDay = today.getDate();
@@ -525,6 +516,59 @@ function TrainingTracker() {
         month: "long"
     });
     const currentYear = today.getFullYear();
+    // Create a unique key for localStorage based on year and month
+    const storageKey = `unifit-training-tracker-${today.getFullYear()}-${today.getMonth()}`;
+    // Load data from localStorage on component mount
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "TrainingTracker.useEffect": ()=>{
+            const savedData = localStorage.getItem(storageKey);
+            if (savedData) {
+                try {
+                    const parsedData = JSON.parse(savedData);
+                    setTrainedDays(new Set(parsedData));
+                } catch (error) {
+                    console.error("Failed to parse training data from localStorage:", error);
+                    // Initialize with default data if parsing fails
+                    setTrainedDays(new Set([
+                        3,
+                        5,
+                        6,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12
+                    ]));
+                }
+            } else {
+                // Initialize with some default data for demo purposes
+                const defaultData = new Set([
+                    3,
+                    5,
+                    6,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12
+                ]);
+                setTrainedDays(defaultData);
+                // Save default data to localStorage
+                localStorage.setItem(storageKey, JSON.stringify(Array.from(defaultData)));
+            }
+        }
+    }["TrainingTracker.useEffect"], [
+        storageKey
+    ]);
+    // Save data to localStorage whenever trainedDays changes
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "TrainingTracker.useEffect": ()=>{
+            localStorage.setItem(storageKey, JSON.stringify(Array.from(trainedDays)));
+        }
+    }["TrainingTracker.useEffect"], [
+        trainedDays,
+        storageKey
+    ]);
     const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
     const days = Array.from({
         length: daysInMonth
@@ -589,7 +633,7 @@ function TrainingTracker() {
                             children: "Did I train today?"
                         }, void 0, false, {
                             fileName: "[project]/components/training-tracker.tsx",
-                            lineNumber: 59,
+                            lineNumber: 88,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -597,13 +641,13 @@ function TrainingTracker() {
                             children: "A simple yes/no marker that removes streak pressure."
                         }, void 0, false, {
                             fileName: "[project]/components/training-tracker.tsx",
-                            lineNumber: 60,
+                            lineNumber: 89,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/training-tracker.tsx",
-                    lineNumber: 58,
+                    lineNumber: 87,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -619,7 +663,7 @@ function TrainingTracker() {
                                             className: "w-4 h-4 text-secondary"
                                         }, void 0, false, {
                                             fileName: "[project]/components/training-tracker.tsx",
-                                            lineNumber: 69,
+                                            lineNumber: 98,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -627,13 +671,13 @@ function TrainingTracker() {
                                             children: trainedCount
                                         }, void 0, false, {
                                             fileName: "[project]/components/training-tracker.tsx",
-                                            lineNumber: 70,
+                                            lineNumber: 99,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/training-tracker.tsx",
-                                    lineNumber: 68,
+                                    lineNumber: 97,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -641,13 +685,13 @@ function TrainingTracker() {
                                     children: "Days trained"
                                 }, void 0, false, {
                                     fileName: "[project]/components/training-tracker.tsx",
-                                    lineNumber: 72,
+                                    lineNumber: 101,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/training-tracker.tsx",
-                            lineNumber: 67,
+                            lineNumber: 96,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -660,7 +704,7 @@ function TrainingTracker() {
                                             className: "w-4 h-4 text-orange-500"
                                         }, void 0, false, {
                                             fileName: "[project]/components/training-tracker.tsx",
-                                            lineNumber: 76,
+                                            lineNumber: 105,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -668,13 +712,13 @@ function TrainingTracker() {
                                             children: streakDays
                                         }, void 0, false, {
                                             fileName: "[project]/components/training-tracker.tsx",
-                                            lineNumber: 77,
+                                            lineNumber: 106,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/training-tracker.tsx",
-                                    lineNumber: 75,
+                                    lineNumber: 104,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -682,13 +726,13 @@ function TrainingTracker() {
                                     children: "Current streak"
                                 }, void 0, false, {
                                     fileName: "[project]/components/training-tracker.tsx",
-                                    lineNumber: 79,
+                                    lineNumber: 108,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/training-tracker.tsx",
-                            lineNumber: 74,
+                            lineNumber: 103,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -702,7 +746,7 @@ function TrainingTracker() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/training-tracker.tsx",
-                                    lineNumber: 82,
+                                    lineNumber: 111,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -710,19 +754,19 @@ function TrainingTracker() {
                                     children: "Consistency"
                                 }, void 0, false, {
                                     fileName: "[project]/components/training-tracker.tsx",
-                                    lineNumber: 83,
+                                    lineNumber: 112,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/training-tracker.tsx",
-                            lineNumber: 81,
+                            lineNumber: 110,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/training-tracker.tsx",
-                    lineNumber: 66,
+                    lineNumber: 95,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -738,12 +782,12 @@ function TrainingTracker() {
                                     className: "w-4 h-4 text-muted-foreground"
                                 }, void 0, false, {
                                     fileName: "[project]/components/training-tracker.tsx",
-                                    lineNumber: 95,
+                                    lineNumber: 124,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/training-tracker.tsx",
-                                lineNumber: 90,
+                                lineNumber: 119,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -763,7 +807,7 @@ function TrainingTracker() {
                                             className: "h-12 flex items-center justify-center border-b border-r border-border bg-card sticky left-0 z-10"
                                         }, void 0, false, {
                                             fileName: "[project]/components/training-tracker.tsx",
-                                            lineNumber: 107,
+                                            lineNumber: 136,
                                             columnNumber: 17
                                         }, this),
                                         days.map((day)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -775,7 +819,7 @@ function TrainingTracker() {
                                                         children: getDayName(day)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/training-tracker.tsx",
-                                                        lineNumber: 116,
+                                                        lineNumber: 145,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -783,13 +827,13 @@ function TrainingTracker() {
                                                         children: day
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/training-tracker.tsx",
-                                                        lineNumber: 117,
+                                                        lineNumber: 146,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, `header-${day}`, true, {
                                                 fileName: "[project]/components/training-tracker.tsx",
-                                                lineNumber: 109,
+                                                lineNumber: 138,
                                                 columnNumber: 19
                                             }, this)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -799,12 +843,12 @@ function TrainingTracker() {
                                                 children: "GYM"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/training-tracker.tsx",
-                                                lineNumber: 127,
+                                                lineNumber: 156,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/components/training-tracker.tsx",
-                                            lineNumber: 126,
+                                            lineNumber: 155,
                                             columnNumber: 17
                                         }, this),
                                         days.map((day)=>{
@@ -827,29 +871,29 @@ function TrainingTracker() {
                                                         strokeWidth: 3
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/training-tracker.tsx",
-                                                        lineNumber: 157,
+                                                        lineNumber: 186,
                                                         columnNumber: 39
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/training-tracker.tsx",
-                                                    lineNumber: 141,
+                                                    lineNumber: 170,
                                                     columnNumber: 23
                                                 }, this)
                                             }, `gym-${day}`, false, {
                                                 fileName: "[project]/components/training-tracker.tsx",
-                                                lineNumber: 135,
+                                                lineNumber: 164,
                                                 columnNumber: 21
                                             }, this);
                                         })
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/training-tracker.tsx",
-                                    lineNumber: 105,
+                                    lineNumber: 134,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/training-tracker.tsx",
-                                lineNumber: 99,
+                                lineNumber: 128,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -860,23 +904,23 @@ function TrainingTracker() {
                                     className: "w-4 h-4 text-muted-foreground"
                                 }, void 0, false, {
                                     fileName: "[project]/components/training-tracker.tsx",
-                                    lineNumber: 171,
+                                    lineNumber: 200,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/training-tracker.tsx",
-                                lineNumber: 166,
+                                lineNumber: 195,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/training-tracker.tsx",
-                        lineNumber: 88,
+                        lineNumber: 117,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/training-tracker.tsx",
-                    lineNumber: 87,
+                    lineNumber: 116,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -889,22 +933,22 @@ function TrainingTracker() {
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/training-tracker.tsx",
-                    lineNumber: 176,
+                    lineNumber: 205,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/training-tracker.tsx",
-            lineNumber: 57,
+            lineNumber: 86,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/training-tracker.tsx",
-        lineNumber: 56,
+        lineNumber: 85,
         columnNumber: 5
     }, this);
 }
-_s(TrainingTracker, "Tn3UKdZNJjJwBquktST/hiepeKc=");
+_s(TrainingTracker, "v0TQ/mP3MdttqBSAeS+0Y7JxaZ4=");
 _c = TrainingTracker;
 function calculateStreak(trainedDays, currentDay) {
     let streak = 0;
